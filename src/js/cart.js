@@ -17,7 +17,7 @@ function renderCartContents() {
     let total = cartItems.reduce((acc, item) => acc + item.FinalPrice * item.quantity, 0);
     
     // Update the content of the cart-total element
-    document.querySelector('.cart-total').innerHTML = `Total: $${total.toFixed(2)}`;
+    document.querySelector('.cart-total').innerHTML = `Total: $${total.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
     
     // Make the cart footer visible
     document.querySelector('.cart-footer').classList.remove('hide');

@@ -1,5 +1,8 @@
 # sleepoutside
 
+## [Deployed Build Link from Netlify](https://main--mellifluous-valkyrie-b4677f.netlify.app/)
+## [Trello Board for this Project](https://trello.com/b/o7fC2Jzc/sleep-outside)
+
 ## Description
 
 Use this as a starting point to complete the WDD 330 team activity: the SleepOutside web application. It scaffolds out a simple web app with Vite support to bundle up our assets.

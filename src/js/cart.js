@@ -1,4 +1,4 @@
-import { getLocalStorage } from './utils.mjs';
+import { setLocalStorage, getLocalStorage } from './utils.mjs';
 
 // This function retrieves cart items from local storage and renders them on the webpage
 function renderCartContents() {
@@ -11,6 +11,7 @@ function renderCartContents() {
   // Set the HTML content of the element with class .product-list to the generated HTML
   document.querySelector('.product-list').innerHTML = htmlItems.join('');
     attachRemoveListeners();
+    attachAddListeners();
   // Check if there are items in the cart
   if (cartItems.length > 0) {
     // Calculate the total
@@ -31,7 +32,6 @@ function renderCartContents() {
     }
   }
 
-
 }
 
 // This function generates the HTML representation for a given cart item
@@ -44,13 +44,15 @@ function cartItemTemplate(item) {
     <h2 class="card__name">${item.Name}</h2>
   </a>
   <p class="cart-card__color">${item.Colors[0].ColorName}</p>
-  <span class="remove-item" data-id="${item.Id}">X</span>
+  <span class="add-item" data-id="${item.Id}">+</span>
+  <span class="remove-item" data-id="${item.Id}">x</span>
   <p class="cart-card__quantity">qty: ${item.quantity || 1}</p>
   <p class="cart-card__price">$${item.FinalPrice}</p>
 </li>`;
 
   return newItem;
 }
+
 
 // Render the cart items on the webpage
 renderCartContents();
@@ -78,6 +80,17 @@ function removeItemFromCart(productId) {
     renderCartContents();
 }
 
+// Function to add an item from the cart based on quantity
+function addItemToCart(productId) {
+  const cartItems = getLocalStorage('so-cart');
+  const itemIndex = cartItems.findIndex(item => item.Id === productId);
+  
+  if (itemIndex !== -1) {
+      cartItems[itemIndex].quantity += 1;
+      setLocalStorage('so-cart', cartItems);
+      renderCartContents();
+  }
+}
 
 function attachRemoveListeners() {
     const removeButtons = document.querySelectorAll('.remove-item');
@@ -88,4 +101,15 @@ function attachRemoveListeners() {
         });
     });
 }
+
+function attachAddListeners() {
+    const addButtons = document.querySelectorAll('.add-item');
+    addButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            const productId = e.target.getAttribute('data-id');
+            addItemToCart(productId);
+        });
+    });
+}
+
 

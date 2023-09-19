@@ -224,7 +224,7 @@ footer {
 .remove-item {
   position: absolute;
   top: 10px;
-  right: 10px;
+  right: 0px;
   cursor: pointer;
   background-color: var(--dark-grey);
   color: white;
@@ -236,6 +236,23 @@ footer {
 .remove-item:hover {
   background-color: red !important ;
   color: var(--dark-grey) !important;
+}
+
+.add-item {
+  position: absolute;
+  top: 50px;
+  right: 0px;
+  cursor: pointer;
+  background-color: var(--dark-grey);
+  color: white;
+  padding: 3.5px 5px 3.5px 5px;
+  border-radius: 30%;
+  font-weight: bold;
+}
+
+.add-item:hover {
+  background-color: green !important ;
+  color: whitesmoke !important;
 }
 
 .cart-card {
@@ -252,3 +269,5 @@ footer {
   text-align: right;
   text-decoration: underline overline;
 }
+
+

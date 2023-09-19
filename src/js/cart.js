@@ -11,6 +11,26 @@ function renderCartContents() {
   // Set the HTML content of the element with class .product-list to the generated HTML
   document.querySelector('.product-list').innerHTML = htmlItems.join('');
     attachRemoveListeners();
+  // Check if there are items in the cart
+  if (cartItems.length > 0) {
+    // Calculate the total
+    let total = cartItems.reduce((acc, item) => acc + item.FinalPrice * item.quantity, 0);
+    
+    // Update the content of the cart-total element
+    document.querySelector('.cart-total').innerHTML = `Total: $${total.toFixed(2)}`;
+    
+    // Make the cart footer visible
+    document.querySelector('.cart-footer').classList.remove('hide');
+  } else {
+    // If cart is empty on page load, hide the cart footer
+    if (document.readyState === 'loading') {
+        document.querySelector('.cart-footer').classList.add('hide');
+    } else {
+        // If cart becomes empty after removing items, set the total to $0.00
+        document.querySelector('.cart-total').innerHTML = `Total: $0.00`;
+    }
+  }
+
 
 }
 

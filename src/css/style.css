@@ -241,3 +241,14 @@ footer {
 .cart-card {
   position: relative;
 }
+
+.hide {
+  display: none;
+}
+
+.cart-total {
+  font-weight: bolder;
+  font-size: larger;
+  text-align: right;
+  text-decoration: underline overline;
+}

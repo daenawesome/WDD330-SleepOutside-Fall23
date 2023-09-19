@@ -13,7 +13,6 @@ export function getLocalStorage(key) {
   }
 }
 
-
 // Save data to local storage
 export function setLocalStorage(key, data) {
   localStorage.setItem(key, JSON.stringify(data));
@@ -35,7 +34,6 @@ export function getParam(param) {
   const urlItem = urlParams.get(param);
   return urlItem;
 }
-
 
 export function renderListWithTemplate(templateFn, parentElement, list, position = 'afterbegin', clear = false) {
   if (clear) {

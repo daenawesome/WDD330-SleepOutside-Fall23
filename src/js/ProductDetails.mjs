@@ -52,7 +52,6 @@ export default class ProductDetails {
     setLocalStorage('so-cart', this.cart);
 }
 
-
   // Render the product details in the specified selector
   renderProductDetails(selector) {
     const element = document.querySelector(selector);

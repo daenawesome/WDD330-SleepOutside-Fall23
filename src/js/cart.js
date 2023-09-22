@@ -1,5 +1,8 @@
 import { setLocalStorage, getLocalStorage, loadHeaderFooter } from './utils.mjs';
 
+// Load the header and footer
+loadHeaderFooter();
+
 // This function retrieves cart items from local storage and renders them on the webpage
 function renderCartContents() {
   // Fetch cart items from local storage
@@ -111,7 +114,4 @@ function attachAddListeners() {
         });
     });
 }
-
-// Load the header and footer
-loadHeaderFooter();
 

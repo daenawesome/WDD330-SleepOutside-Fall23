@@ -1,5 +1,6 @@
 import ProductData from './ProductData.mjs';
 import ProductListing from './ProductList.mjs';
+import { loadHeaderFooter } from './utils.mjs';
 
 // Create an instance of ProductData for the 'tents' category
 const productData = new ProductData('tents');
@@ -12,3 +13,6 @@ const productListing = new ProductListing('tents', productData, productListEleme
 
 // Initialize the product listing by calling the init method
 productListing.init();
+
+// Load the header and footer
+loadHeaderFooter();

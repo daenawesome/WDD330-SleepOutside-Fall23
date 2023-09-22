@@ -1,5 +1,4 @@
 import { setLocalStorage, getLocalStorage, loadHeaderFooter } from './utils.mjs';
-// import { loadHeaderFooter } from './utils.mjs';
 
 // This function retrieves cart items from local storage and renders them on the webpage
 function renderCartContents() {

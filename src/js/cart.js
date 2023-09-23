@@ -5,8 +5,8 @@ loadHeaderFooter();
 
 // This function retrieves cart items from local storage and renders them on the webpage
 function renderCartContents() {
-  // Fetch cart items from local storage
-  const cartItems = getLocalStorage('so-cart');
+  // Fetch cart items from local storage & default to empty array if null
+  const cartItems = getLocalStorage('so-cart') || [];
   
   // Convert each item to its HTML representation using the cartItemTemplate function
   const htmlItems = cartItems.map((item) => cartItemTemplate(item));

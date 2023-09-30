@@ -1,4 +1,4 @@
-import { setLocalStorage, getLocalStorage, loadHeaderFooter } from './utils.mjs';
+import { setLocalStorage, getLocalStorage, loadHeaderFooter, renderSuperscript } from './utils.mjs';
 
 // Load the header and footer
 loadHeaderFooter();
@@ -7,7 +7,7 @@ loadHeaderFooter();
 function renderCartContents() {
   // Fetch cart items from local storage & default to empty array if null
   const cartItems = getLocalStorage('so-cart') || [];
-  
+
   // Convert each item to its HTML representation using the cartItemTemplate function
   const htmlItems = cartItems.map((item) => cartItemTemplate(item));
   
@@ -81,6 +81,8 @@ function removeItemFromCart(productId) {
     
     // Re-render the cart contents
     renderCartContents();
+    // Superscript Feature
+    renderSuperscript();
 }
 
 // Function to add an item from the cart based on quantity
@@ -93,6 +95,9 @@ function addItemToCart(productId) {
       setLocalStorage('so-cart', cartItems);
       renderCartContents();
   }
+
+  // Superscript Feature
+  renderSuperscript();
 }
 
 function attachRemoveListeners() {

@@ -80,4 +80,45 @@ export async function loadHeaderFooter() {
   // Render the loaded header and footer templates into their respective elements
   renderWithTemplate(headerTemplate.innerHTML, headerElement);
   renderWithTemplate(footerTemplate.innerHTML, footerElement);
+
+  renderSuperscript();
+}
+
+// Superscript feature
+export function renderSuperscript() {
+  let cart = getLocalStorage('so-cart')
+  let totalQuantity 
+  if(cart !== null){
+    // Calculate the total quantity of items in the cart
+    totalQuantity = cart.reduce((acc, item) => acc + item.quantity, 0);
+  }else{
+    totalQuantity = 0
+  }
+  const superscript = document.getElementById('superscript');
+  superscript.innerHTML = totalQuantity;
+
+  // Change the display style of superscript based on totalQuantity
+  if (totalQuantity === 0) {
+    superscript.style.display = 'none';
+  } else {
+    superscript.style.display = 'flex';
+  }
+
+  // Added cartIcon Id on (backpack) svg for animation
+  const cartIcon = document.getElementById('cartIcon');
+  // Use session storage to store the old quantity
+  const oldQuantity = parseInt(sessionStorage.getItem('cartQuantity') || '0');
+  // Update the cart quantity in session storage
+  sessionStorage.setItem('cartQuantity', totalQuantity.toString());
+
+  // Add the shake or shrink class based on the change in quantity
+  if (totalQuantity > oldQuantity) {
+    cartIcon.classList.add('shake');
+  } else if (totalQuantity < oldQuantity) {
+    cartIcon.classList.add('shrink');
+  }
+  // Remove the class after the animation to add again later
+  setTimeout(() => {
+    cartIcon.classList.remove('shake', 'shrink');
+  }, 820);
 }

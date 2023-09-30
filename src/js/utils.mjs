@@ -80,4 +80,29 @@ export async function loadHeaderFooter() {
   // Render the loaded header and footer templates into their respective elements
   renderWithTemplate(headerTemplate.innerHTML, headerElement);
   renderWithTemplate(footerTemplate.innerHTML, footerElement);
+
+  renderSuperscript();
 }
+
+// Superscript feature
+export function renderSuperscript() {
+  let cart = getLocalStorage('so-cart')
+  let totalQuantity 
+  if(cart !== null){
+    // Calculate the total quantity of items in the cart
+    totalQuantity = cart.reduce((acc, item) => acc + item.quantity, 0);
+  }else{
+    totalQuantity = 0
+  }
+  const superscript = document.getElementById('superscript');
+  superscript.innerHTML = totalQuantity;
+
+  // Change the display style of superscript based on totalQuantity
+  if (totalQuantity === 0) {
+    superscript.style.display = 'none';
+  } else {
+    superscript.style.display = 'flex';
+  }
+}
+
+

@@ -270,4 +270,19 @@ footer {
   text-decoration: underline overline;
 }
 
-
+#superscript {
+  position: absolute;
+  top: 3px;
+  left: 7px;
+  background-color: #e5aa72;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  font-size: .8em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #4e2286;
+  font-weight: bold;
+  padding: 3px;
+}

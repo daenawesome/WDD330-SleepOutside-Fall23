@@ -1,4 +1,4 @@
-import { setLocalStorage, getLocalStorage } from './utils.mjs';
+import { setLocalStorage, getLocalStorage, renderSuperscript } from './utils.mjs';
 
 // Function to generate the product details HTML
 function productDetailsTemplate(product) {
@@ -60,6 +60,8 @@ export default class ProductDetails {
 
     // Update the local storage with the modified cart
     setLocalStorage('so-cart', this.cart);
+    // Superscript Feature
+    renderSuperscript();
 }
 
 

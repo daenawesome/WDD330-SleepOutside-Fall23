@@ -103,6 +103,22 @@ export function renderSuperscript() {
   } else {
     superscript.style.display = 'flex';
   }
+
+  // Added cartIcon Id on (backpack) svg for animation
+  const cartIcon = document.getElementById('cartIcon');
+  // Use session storage to store the old quantity
+  const oldQuantity = parseInt(sessionStorage.getItem('cartQuantity') || '0');
+  // Update the cart quantity in session storage
+  sessionStorage.setItem('cartQuantity', totalQuantity.toString());
+
+  // Add the shake or shrink class based on the change in quantity
+  if (totalQuantity > oldQuantity) {
+    cartIcon.classList.add('shake');
+  } else if (totalQuantity < oldQuantity) {
+    cartIcon.classList.add('shrink');
+  }
+  // Remove the class after the animation to add again later
+  setTimeout(() => {
+    cartIcon.classList.remove('shake', 'shrink');
+  }, 820);
 }
-
-

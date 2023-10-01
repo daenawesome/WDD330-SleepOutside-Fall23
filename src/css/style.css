@@ -312,3 +312,8 @@ footer {
 .shrink {
   animation: shrink 0.5s cubic-bezier(.36,.07,.19,.97) both;
 }
+
+.product-categories {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}

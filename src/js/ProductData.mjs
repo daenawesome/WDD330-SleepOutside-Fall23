@@ -1,3 +1,5 @@
+const baseURL = import.meta.env.VITE_SERVER_URL;
+
 // Function to convert a response to JSON
 function convertToJson(res) {
   if (res.ok) {
@@ -9,22 +11,22 @@ function convertToJson(res) {
 
 // ProductData class responsible for fetching and managing product data
 export default class ProductData {
-  constructor(category) {
-    // Store the product category and construct the data path
-    this.category = category;
-    this.path = `../json/${this.category}.json`;
+  constructor() {
+    // Base URL from environment variable
+    this.baseURL = import.meta.env.VITE_SERVER_URL;
   }
 
   // Fetch product data and convert it to JSON
-  getData() {
-    return fetch(this.path)
-      .then(convertToJson)
-      .then((data) => data);
+  async getData(category) {
+    const response = await fetch(this.baseURL + `products/search/${category}`);
+    const data = await convertToJson(response);
+    return data.Result;
   }
 
-  // Find a product by its ID
+  // Fetch product data by ID from the API
   async findProductById(id) {
-    const products = await this.getData();
-    return products.find((item) => item.Id === id);
+    const response = await fetch(this.baseURL + `product/${id}`);
+    const data = await response.json();
+    return data;
   }
 }

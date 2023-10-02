@@ -121,3 +121,10 @@ export function renderSuperscript() {
     cartIcon.classList.remove('shake', 'shrink');
   }, 820);
 }
+
+// Calculate discount percentage function
+export function calculateDiscountPercentage(originalPrice, discountedPrice) {
+  let discount = originalPrice - discountedPrice;
+  let discountPercentage = (discount / originalPrice) * 100;
+  return Math.round(discountPercentage);
+}

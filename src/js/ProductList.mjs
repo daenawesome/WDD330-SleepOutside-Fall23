@@ -1,4 +1,4 @@
-import { renderListWithTemplate } from './utils.mjs';
+import { renderListWithTemplate, calculateDiscountPercentage } from './utils.mjs';
 
 // ProductListing class responsible for rendering a list of products
 export default class ProductListing {
@@ -30,12 +30,22 @@ export default class ProductListing {
 
 
 function productCardTemplate(product) {
+  // Calculate the discount percentage
+  let discountPercentage = calculateDiscountPercentage(product.SuggestedRetailPrice, product.FinalPrice);
   return `<li class="product-card">
     <a href="/product_pages/index.html?product=${product.Id}">
       <img src="${product.Images.PrimaryMedium}" alt="Image of ${product.Name}">
       <h3 class="card__brand">${product.Brand.Name}</h3>
       <h2 class="card__name">${product.NameWithoutBrand}</h2>
+      <div class="discount-percent">
+      <p>${discountPercentage}% off</p>
+      <span class="deal">Deal</span>
+      </div>
+      <div class="product-price">
       <p class="product-card__price">$${product.FinalPrice}</p>
+      <p class="product-card__discount">List Price: <span class="list-price">$${product.SuggestedRetailPrice}</span></p>
+      </div>
     </a>
   </li>`;
 }
+

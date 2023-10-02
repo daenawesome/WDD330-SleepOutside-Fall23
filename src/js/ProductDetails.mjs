@@ -5,7 +5,7 @@ function productDetailsTemplate(product) {
   return `<section class="product-detail">
     <h3>${product.Brand.Name}</h3>
     <h2 class="divider">${product.NameWithoutBrand}</h2>
-    <img class="divider" src="${product.Image}" alt="${product.NameWithoutBrand}" />
+    <img class="divider" src="${product.Images.PrimaryLarge}" alt="${product.NameWithoutBrand}" />
     <p class="product-card__price">$${product.FinalPrice}</p>
     <p class="product__color">${product.Colors[0].ColorName}</p>
     <p class="product__description">${product.DescriptionHtmlSimple}</p>
@@ -26,12 +26,20 @@ export default class ProductDetails {
 
   // Initialize the product details
   async init() {
+    // Log the Product ID
+    console.log('Product ID:', this.productId);
+    // Log the Data Source
+    console.log('Data Source:', this.dataSource);
+
     // Use the data source to get the details for the current product (returns a promise)
-    this.product = await this.dataSource.findProductById(this.productId);
+    this.product = (await this.dataSource.findProductById(this.productId)).Result; // fetched product details are nested inside a Result property.
+
+    // Log the Fetched Product Details
+    console.log('Fetched Product Details:', this.product);
     
     // Render the product details in the "main" element
     this.renderProductDetails('main');
-    
+
     // Add a click event listener to the "Add to Cart" button
     // Note the use of .bind(this) to maintain the correct context
     document.getElementById('addToCart').addEventListener('click', this.addToCart.bind(this));

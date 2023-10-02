@@ -12,28 +12,27 @@ export default class ProductListing {
 
   // Fetch and render the product list
   async init() {
-    const products = await this.dataSource.getData();
-    // Check if category is 'tents' and filter the products
-    const filteredProducts = this.category === 'tents' ? this.filterTentsById(products) : products;
-    this.renderList(filteredProducts);
-}
+    // fetch the products
+    const products = await this.dataSource.getData(this.category);
+    console.log('Products:', products);
+    // Render the list with the fetched products
+    this.renderList(products);
+    console.log('List Element:', this.listElement);
+    //set the title to the current category
+    document.querySelector('.title').innerHTML = this.category;
+  }
 
-// Render the product list using a template
-renderList(list, position = 'afterbegin', clear = false) {
-    renderListWithTemplate(productCardTemplate, this.listElement, list, position, clear);
-}
-
-  // Filter the tents based on a predefined list of tent IDs
-  filterTentsById(tents) {
-    const tent_ids_to_keep = ['880RR', '985RF', '985PR', '344YJ'];
-    return tents.filter(tent => tent_ids_to_keep.includes(tent.Id));
+  // Render the product list using a template
+  renderList(list) {
+    renderListWithTemplate(productCardTemplate, this.listElement, list);
   }
 }
 
+
 function productCardTemplate(product) {
   return `<li class="product-card">
-    <a href="../product_pages/index.html?product=${product.Id}">
-      <img src="${product.Image}" alt="Image of ${product.Name}">
+    <a href="/product_pages/index.html?product=${product.Id}">
+      <img src="${product.Images.PrimaryMedium}" alt="Image of ${product.Name}">
       <h3 class="card__brand">${product.Brand.Name}</h3>
       <h2 class="card__name">${product.NameWithoutBrand}</h2>
       <p class="product-card__price">$${product.FinalPrice}</p>

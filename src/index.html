@@ -69,6 +69,11 @@
     <footer id="footer"></footer>
   
 <script type="module" src="./js/main.js"></script>
+<script type="module">
+  import Alert from './js/Alert.js';
+  const alertInstance = new Alert();
+  alertInstance.loadAlerts().then(() => alertInstance.buildAlerts());
+</script>
 
 </body>
 </html>

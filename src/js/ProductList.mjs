@@ -31,7 +31,7 @@ export default class ProductListing {
 
 function productCardTemplate(product) {
   // Calculate the discount percentage
-  let discountPercentage = calculateDiscountPercentage(product.SuggestedRetailPrice, product.FinalPrice);
+  let { discountPercentage } = calculateDiscountPercentage(product.SuggestedRetailPrice, product.FinalPrice);
   return `<li class="product-card">
     <a href="/product_pages/index.html?product=${product.Id}">
       <img src="${product.Images.PrimaryMedium}" alt="Image of ${product.Name}">

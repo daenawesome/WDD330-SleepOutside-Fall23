@@ -248,7 +248,7 @@ button {
   color: azure;
   margin: 0;
   background-color: red;
-  padding: .3em;
+  padding: .5em;
   border-radius: 3px;
 }
 
@@ -257,6 +257,18 @@ button {
   font-weight: bold;
   padding: .1em;
 }
+
+sup {
+  font-size: small;
+
+  vertical-align: text-top;
+}
+
+/* .savings {
+  vertical-align: super;
+  padding-left: 3px;
+  font-size: medium;
+} */
 
 .flag-discount {
   border-radius: 6px 0 0 6px;

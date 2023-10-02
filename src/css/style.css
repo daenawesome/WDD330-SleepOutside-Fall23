@@ -206,9 +206,101 @@ button {
   grid-column: 3;
 }
 
+.product-price {
+  display: flex;
+  align-items: baseline;
+}
+
 .cart-card__price {
   grid-row: 2;
   grid-column: 3;
+}
+
+.product-card__discount {
+  font-size:x-small;
+  color: #737676;
+  padding: .5em;
+  margin: 0;
+}
+
+.product-card__price {
+  margin: .1em;
+  font-weight: bold;
+}
+
+.product-card__price span{
+  font-size: clamp(1em, 3vw, 2em);
+}
+
+.list-price {
+  text-decoration: line-through;
+}
+
+.discount-percent {
+  display: flex;
+  align-items: center;
+  column-gap: 6px;
+  flex-wrap: wrap;
+  font-size: small;
+}
+
+.discount-percent p{
+  color: azure;
+  margin: 0;
+  background-color: red;
+  padding: .5em;
+  border-radius: 3px;
+}
+
+.deal {
+  color: red;
+  font-weight: bold;
+  padding: .1em;
+}
+
+sup {
+  font-size: small;
+
+  vertical-align: text-top;
+}
+
+/* .savings {
+  vertical-align: super;
+  padding-left: 3px;
+  font-size: medium;
+} */
+
+.flag-discount {
+  border-radius: 6px 0 0 6px;
+  color: #fff;
+  display: block;
+  float: left;
+  padding: 5px 10px 5px 10px;
+  background: red;
+  font-size: 2em;
+  position: relative;
+  font-weight: bolder;
+  min-width: 80%;
+}
+.flag-discount::before,
+.flag-discount::after {
+  content: "";
+  position: absolute;
+  left: 100%;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  display: block;
+}
+.flag-discount::before {
+  top: 0;
+  border-width: 22px 15px 0 0;
+  border-color: red transparent transparent transparent;
+}
+.flag-discount::after {
+  bottom: 0;
+  border-width: 0 15px 22px 0;
+  border-color: transparent transparent red transparent;
 }
 
 @media screen and (min-width: 500px) {
@@ -309,6 +401,7 @@ footer {
   color: #4e2286;
   font-weight: bold;
   padding: 3px;
+  z-index: 100;
 }
 
 /* Cart BACKPACK SVG Animation */

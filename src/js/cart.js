@@ -40,10 +40,10 @@ function renderCartContents() {
 // This function generates the HTML representation for a given cart item
 function cartItemTemplate(item) {
   const newItem = `<li class="cart-card divider">
-  <a href="#" class="cart-card__image">
-    <img src="${item.Image}" alt="${item.Name}" />
+  <a href="/product_pages/index.html?product=${item.Id}" class="cart-card__image">
+    <img src="${item.Images.PrimaryMedium}" alt="${item.Name}" />
   </a>
-  <a href="#">
+  <a href="/product_pages/index.html?product=${item.Id}">
     <h2 class="card__name">${item.Name}</h2>
   </a>
   <p class="cart-card__color">${item.Colors[0].ColorName}</p>

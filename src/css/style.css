@@ -24,18 +24,24 @@ body {
 }
 img {
   max-width: 100%;
+  padding: .2em;
 }
 header {
   display: flex;
   justify-content: space-between;
   padding: 0 10px;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: azure;
 }
 .logo {
   line-height: 60px;
   width: 245px;
   overflow: hidden;
   display: flex;
-  font-size: 30px;
+  font-size: 40px;
   text-align: right;
   font-family: var(--font-headline);
 }
@@ -104,7 +110,7 @@ button {
 }
 
 .cart svg {
-  width: 25px;
+  width: 35px;
 }
 .cart:hover svg {
   fill: gray;
@@ -179,6 +185,9 @@ button {
   grid-row: 1/3;
   grid-column: 1;
 }
+.cart-card img {
+  padding: 1em;
+}
 .cart-card p {
   margin-top: 0;
 }
@@ -219,7 +228,16 @@ button {
 footer {
   font-size: var(--small-font);
   padding: 1em;
+
+  border-top: 2px solid var(--primary-color);
+  padding: 0 10px;
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: azure;
 }
+
 
 .remove-item {
   position: absolute;
@@ -266,15 +284,21 @@ footer {
 .cart-total {
   font-weight: bolder;
   font-size: larger;
-  text-align: right;
-  text-decoration: underline overline;
+  text-align: center;
+  /* text-decoration: underline overline; */
+  margin: 0;
+  padding: .5em;
+}
+
+.cart-footer {
+  border-top: 2px solid var(--primary-color);
 }
 
 #superscript {
   position: absolute;
   top: 3px;
   left: 7px;
-  background-color: #e5aa72;
+  background-color: var(--primary-color);
   width: 22px;
   height: 22px;
   border-radius: 50%;
@@ -311,4 +335,42 @@ footer {
 }
 .shrink {
   animation: shrink 0.5s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+
+/* product grid styles */
+.product-grid {
+  list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  text-align: center;
+  color: var(--dark-grey);
+  padding-left: 0;
+}
+
+.product-grid > li {
+  width: 150px;
+  padding: 0.5em;
+  margin: 1em;
+}
+.product-grid h2 {
+  margin: 0;
+  padding-top: 1em;
+  font-size: 1.2em;
+}
+.product-grid a {
+  text-decoration: none;
+}
+.product-grid a:link,
+.product-grid a:visited {
+  color: var(--dark-grey);
+}
+.product-grid a:hover {
+  text-decoration: underline;
+}
+
+.title {
+  font-weight: bolder;
+  text-transform: uppercase;
 }

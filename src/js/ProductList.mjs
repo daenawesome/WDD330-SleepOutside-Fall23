@@ -32,9 +32,21 @@ export default class ProductListing {
 function productCardTemplate(product) {
   // Calculate the discount percentage
   let { discountPercentage } = calculateDiscountPercentage(product.SuggestedRetailPrice, product.FinalPrice);
+  // const selectedImage = selectImageBasedOnWidth(product);
   return `<li class="product-card">
     <a href="/product_pages/index.html?product=${product.Id}">
-      <img src="${product.Images.PrimaryMedium}" alt="Image of ${product.Name}">
+      <img class="divider" 
+         src="${product.Images.PrimaryLarge}" 
+         srcset="${product.Images.PrimaryExtraLarge} 1200w, 
+                 ${product.Images.PrimaryLarge} 800w, 
+                 ${product.Images.PrimaryMedium} 500w, 
+                 ${product.Images.PrimarySmall} 300w"
+         sizes="(min-width: 1200px) 1200px,
+                (min-width: 800px) 800px,
+                (min-width: 500px) 500px,
+                300px" 
+         alt="${product.Name}" />
+      
       <h3 class="card__brand">${product.Brand.Name}</h3>
       <h2 class="card__name">${product.NameWithoutBrand}</h2>
       <div class="discount-percent">

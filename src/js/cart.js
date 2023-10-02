@@ -39,9 +39,17 @@ function renderCartContents() {
 
 // This function generates the HTML representation for a given cart item
 function cartItemTemplate(item) {
+  // const selectedImage = selectImageBasedOnWidth(item);
   const newItem = `<li class="cart-card divider">
   <a href="/product_pages/index.html?product=${item.Id}" class="cart-card__image">
-    <img src="${item.Images.PrimaryMedium}" alt="${item.Name}" />
+    <img src="${item.Images.PrimaryMedium}" 
+         srcset="${item.Images.PrimaryLarge} 800w, 
+                 ${item.Images.PrimaryMedium} 500w, 
+                 ${item.Images.PrimarySmall} 300w"
+         sizes="(min-width: 800px) 800px,
+                (min-width: 500px) 500px,
+                300px" 
+         alt="${item.Name}" />
   </a>
   <a href="/product_pages/index.html?product=${item.Id}">
     <h2 class="card__name">${item.Name}</h2>

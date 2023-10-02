@@ -1,12 +1,29 @@
-import { setLocalStorage, getLocalStorage, renderSuperscript, calculateDiscountPercentage } from './utils.mjs';
+import { 
+  setLocalStorage, 
+  getLocalStorage, 
+  renderSuperscript, 
+  calculateDiscountPercentage 
+} from './utils.mjs';
 
 // Function to generate the product details HTML
 function productDetailsTemplate(product) {
   let { discountPercentage, discount } = calculateDiscountPercentage(product.SuggestedRetailPrice, product.FinalPrice);
+
   return `<section class="product-detail">
     <h3>${product.Brand.Name}</h3>
     <h2 class="divider">${product.NameWithoutBrand}</h2>
-    <img class="divider" src="${product.Images.PrimaryLarge}" alt="${product.NameWithoutBrand}" />
+    <img class="divider" 
+         src="${product.Images.PrimaryLarge}" 
+         srcset="${product.Images.PrimaryExtraLarge} 1200w, 
+                 ${product.Images.PrimaryLarge} 800w, 
+                 ${product.Images.PrimaryMedium} 500w, 
+                 ${product.Images.PrimarySmall} 300w"
+         sizes="(min-width: 1200px) 1200px,
+                (min-width: 800px) 800px,
+                (min-width: 500px) 500px,
+                300px" 
+         alt="${product.NameWithoutBrand}" />
+    
     <div class="discount-percent">
       <span class="flag-discount">${discountPercentage}%<sup>off</sup> <span class="savings">[ SAVE: $${discount} ]</span></span>
       <span class="deal">Deal Price!</span>

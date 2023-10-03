@@ -59,6 +59,7 @@ export default class ProductDetails {
 
     // Log the Fetched Product Details
     console.log('Fetched Product Details:', this.product);
+    updateBreadcrumb(this.product.Category, this.product.NameWithoutBrand);
     
     // Render the product details in the "main" element
     this.renderProductDetails('main');
@@ -103,3 +104,11 @@ export default class ProductDetails {
     element.insertAdjacentHTML('afterBegin', productDetailsTemplate(this.product));
   }
 }
+
+function updateBreadcrumb(category, productName) {
+  const breadcrumb = document.getElementById('breadcrumb');
+  if (breadcrumb) {
+      breadcrumb.innerHTML = `<a href="/product-listing/index.html?category=${category}">${[...category][0].toUpperCase() + category.slice(1)}</a> &#8594 ${productName}`;
+  }
+}
+

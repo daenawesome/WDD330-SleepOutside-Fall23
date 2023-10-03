@@ -467,3 +467,11 @@ footer {
   font-weight: bolder;
   text-transform: uppercase;
 }
+
+#breadcrumb {
+  font-size: 10px;
+  color: #737676;
+  margin: 0;
+  font-style: italic;
+  font-weight: bold;
+}

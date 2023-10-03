@@ -15,6 +15,7 @@ export default class ProductListing {
     // fetch the products
     const products = await this.dataSource.getData(this.category);
     console.log('Products:', products);
+    updateBreadcrumb(this.category, products.length);
     // Render the list with the fetched products
     this.renderList(products);
     console.log('List Element:', this.listElement);
@@ -59,5 +60,12 @@ function productCardTemplate(product) {
       </div>
     </a>
   </li>`;
+}
+
+function updateBreadcrumb(category, itemCount) {
+  const breadcrumb = document.getElementById('breadcrumb');
+  if (breadcrumb) {
+      breadcrumb.innerHTML = `${[...category][0].toUpperCase() + category.slice(1)}&#8594 (showing ${itemCount} items)`;
+  }
 }
 

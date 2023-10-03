@@ -11,29 +11,56 @@ export default class ProductListing {
   }
 
   // Fetch and render the product list
-  async init() {
+  async init(sort = 'default', filter = 'all') {
+    // console.log('Sort parameter:', sort); // Check Sorting
+
     // fetch the products
-    const products = await this.dataSource.getData(this.category);
-    console.log('Products:', products);
+    let products = await this.dataSource.getData(this.category);
+    // console.log('Products:', products);
+    
     updateBreadcrumb(this.category, products.length);
-    // Render the list with the fetched products
-    this.renderList(products);
-    console.log('List Element:', this.listElement);
+    
+    
+    // Apply filtering if filter is not 'all'
+    if (filter !== 'all') {
+      products = products.filter(product => product.Brand.Name === filter);
+    }
+
+    // Apply sort based on the sort parameter
+    if (sort === 'Price: Low to High') {
+      products.sort((a, b) => Number(a.FinalPrice) - Number(b.FinalPrice));
+  } else if (sort === 'Price: High to Low') {
+      products.sort((a, b) => Number(b.FinalPrice) - Number(a.FinalPrice));
+  } else if (sort === 'Name: Ascending') {
+      products.sort((a, b) => a.NameWithoutBrand.localeCompare(b.NameWithoutBrand));
+  } else if (sort === 'Name: Descending') {
+      products.sort((a, b) => b.NameWithoutBrand.localeCompare(a.NameWithoutBrand));
+  } else if (sort === 'Discount') {
+      products.sort((a, b) => {
+          const discountA = calculateDiscountPercentage(a.SuggestedRetailPrice, a.FinalPrice).discountPercentage;
+          const discountB = calculateDiscountPercentage(b.SuggestedRetailPrice, b.FinalPrice).discountPercentage;
+          return discountB - discountA;  // Sorting in descending order to get highest discount first
+      });
+}
+  // Check sorting
+  // console.log('After sorting:', products);
+  
+  // Render the list with the fetched products 
+  this.renderList(products);
     //set the title to the current category
     document.querySelector('.title').innerHTML = this.category;
   }
 
   // Render the product list using a template
   renderList(list) {
+    this.listElement.innerHTML = '';  
     renderListWithTemplate(productCardTemplate, this.listElement, list);
   }
 }
 
-
 function productCardTemplate(product) {
   // Calculate the discount percentage
   let { discountPercentage } = calculateDiscountPercentage(product.SuggestedRetailPrice, product.FinalPrice);
-  // const selectedImage = selectImageBasedOnWidth(product);
   return `<li class="product-card">
     <a href="/product_pages/index.html?product=${product.Id}">
       <img class="divider" 

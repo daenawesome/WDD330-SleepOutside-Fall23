@@ -18,20 +18,24 @@ export default class ProductData {
 
   async getData(category) {
     // Logging the category
-    console.log('Category:', category); 
+    // console.log('Category:', category); 
+
     // Sending a GET request to the API to search products by category.
     // The URL is constructed by concatenating the baseURL, 'products/search/', and the category.
     const response = await fetch(this.baseURL + `products/search/${category}`);
+    
     // Logging the API response
-    console.log('Response:', response);
+    // console.log('Response:', response);
+
     // Converting the API response to JSON
     const data = await convertToJson(response);
+    
     // Logging the JSON data
-    console.log('Data:', data);
+    // console.log('Data:', data);
+
     return data.Result; // fetched product details are nested inside a Result property.
   }
   
-
   // Fetch product data by ID from the API
   async findProductById(id) {
     // Sending a GET request to the API to fetch a product by its ID.

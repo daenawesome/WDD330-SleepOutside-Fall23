@@ -13,6 +13,25 @@
     <main class="divider">
       <section class="products">
         <h2>Top Products for "<span class="title"></span></span>"</h2>
+        
+          <div class="sort-filter-container">
+            <label for="filter-brand-dropdown">Filter by Brand:</label>
+            <select id="filter-brand-dropdown">
+              <!-- Brand options will be dynamically populated -->
+              <option value="all">All</option>
+            </select>
+            
+            <label for="sort-dropdown">Sort by:</label>
+            <select id="sort-dropdown">
+              <option value="None">None</option>
+              <option value="Price: Low to High">Price: Low to High</option>
+              <option value="Price: High to Low">Price: High to Low</option>
+              <option value="Name: Ascending">Name: Ascending</option>
+              <option value="Name: Descending">Name: Descending</option>
+              <option value="Discount">Discount</option>
+            </select>
+          </div>
+
         <ul id="product-list" class="product-list"></ul>
       </section>
     </main>

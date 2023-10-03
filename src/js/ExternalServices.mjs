@@ -9,8 +9,8 @@ function convertToJson(res) {
   }
 }
 
-// ProductData class responsible for fetching and managing product data
-export default class ProductData {
+// ExternalServices class responsible for fetching and managing product data
+export default class ExternalServices {
   constructor() {
     // Base URL from environment variable
     this.baseURL = import.meta.env.VITE_SERVER_URL;
@@ -43,5 +43,17 @@ export default class ProductData {
     const response = await fetch(this.baseURL + `product/${id}`);
     const data = await response.json();
     return data;
+  }
+
+  async checkout(orderData) {
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(orderData)
+    };
+    const response = await fetch(`${this.baseURL}checkout`, options);
+    return response.json();
   }
 }

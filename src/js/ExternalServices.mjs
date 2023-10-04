@@ -1,4 +1,5 @@
-const baseURL = import.meta.env.VITE_SERVER_URL;
+const fetchBaseURL = import.meta.env.VITE_FETCH_SERVER_URL;
+const checkoutBaseURL = import.meta.env.VITE_CHECKOUT_SERVER_URL;
 
 // Function to convert a response to JSON
 async function convertToJson(res) {
@@ -9,12 +10,12 @@ async function convertToJson(res) {
   return jsonResponse;
 }
 
-
 // ExternalServices class responsible for fetching and managing product data
 export default class ExternalServices {
   constructor() {
     // Base URL from environment variable
-    this.baseURL = import.meta.env.VITE_SERVER_URL;
+    this.fetchBaseURL = import.meta.env.VITE_FETCH_SERVER_URL
+    this.checkoutBaseURL = import.meta.env.VITE_CHECKOUT_SERVER_URL;
   }
 
   async getData(category) {
@@ -23,7 +24,7 @@ export default class ExternalServices {
 
     // Sending a GET request to the API to search products by category.
     // The URL is constructed by concatenating the baseURL, 'products/search/', and the category.
-    const response = await fetch(this.baseURL + `products/search/${category}`);
+    const response = await fetch(this.fetchBaseURL + `products/search/${category}`);
     
     // Logging the API response
     // console.log('Response:', response);
@@ -41,7 +42,7 @@ export default class ExternalServices {
   async findProductById(id) {
     // Sending a GET request to the API to fetch a product by its ID.
     // The URL is constructed by concatenating the baseURL, 'product/', and the product ID.
-    const response = await fetch(this.baseURL + `product/${id}`);
+    const response = await fetch(this.fetchBaseURL + `product/${id}`);
     const data = await response.json();
     return data;
   }
@@ -57,7 +58,7 @@ export default class ExternalServices {
       body: JSON.stringify(orderData) // convert order data to a JSON string
     };
     // send the request to the server
-    const response = await fetch(`${this.baseURL}checkout`, options);
+    const response = await fetch(`${this.checkoutBaseURL}checkout`, options);
     // convert and return the response from the server into a JSON object
     return response.json();
   }

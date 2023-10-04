@@ -3,7 +3,7 @@ export function qs(selector, parent = document) {
   return parent.querySelector(selector);
 }
 
-// Retrieve data from local storage
+// Fetch and parse JSON data from local storage by key
 export function getLocalStorage(key) {
   try {
     return JSON.parse(localStorage.getItem(key));
@@ -13,7 +13,7 @@ export function getLocalStorage(key) {
   }
 }
 
-// Save data to local storage
+// Data to JSON and Save data to local storage
 export function setLocalStorage(key, data) {
   localStorage.setItem(key, JSON.stringify(data));
 }
@@ -35,6 +35,7 @@ export function getParam(param) {
   return urlItem;
 }
 
+// Render a list of items using a template function and attach to a parent DOM element
 export function renderListWithTemplate(templateFn, parentElement, list, position = 'afterbegin', clear = false) {
   if (clear) {
     parentElement.innerHTML = '';
@@ -132,6 +133,7 @@ export function calculateDiscountPercentage(originalPrice, discountedPrice) {
   };
 }
 
+// Display alert message at the top of the window with duration and scroll-to-top action
 export function alertMessage(message, scroll = true, duration = 30000) {
   // create element to hold our alert
   const alert = document.createElement('div');
@@ -145,30 +147,65 @@ export function alertMessage(message, scroll = true, duration = 30000) {
       if(e.target.classList.contains('alert-close')) {
           clearTimeout(timer);  // Clear the timer if it's still pending
           fadeOutAndRemove(this);
-          // this.remove();  // Remove the alert
       }
   });
-  // add the alert to the top of main
-  const main = document.querySelector('main');
-  main.prepend(alert);
+  
+  const header = document.querySelector('header');
+  let alertContainer = header.querySelector('.alert-container');
+
+  // If the alert-container doesn't exist, create and append it to the header
+  if (!alertContainer) {
+      alertContainer = document.createElement('div');
+      alertContainer.classList.add('alert-container');
+      header.prepend(alertContainer);
+  }
+
+  // Append alert to the alertContainer
+  alertContainer.appendChild(alert);
+
   // make sure they see the alert by scrolling to the top of the window
-  // we may not always want to do this...so default to scroll=true, but allow it to be passed in and overridden.
-  if(scroll)
+  if (scroll)
       window.scrollTo(0,0);
   // Set a timer to automatically close the alert after the duration
   timer = setTimeout(() => {
       fadeOutAndRemove(alert);
-      // alert.remove();
   }, duration);
 
   function fadeOutAndRemove(element) {
     element.style.animation = 'fadeOut 0.5s forwards';
     setTimeout(() => {
         element.remove();
-    }, 500); // This should match the duration of the fadeOut animation
+    }, 500); // should match the duration of the fadeOut animation
+  }
+}
+
+// toast notification with a message and an overlay
+export function showToast(message) {
+  let toast = document.getElementById('toast');
+  let overlay = document.getElementById('overlay');
+
+  // If toast doesn't exist, create it
+  if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'toast';
+      document.body.appendChild(toast);
   }
 
+  // If overlay doesn't exist, create it
+  if (!overlay) {
+      overlay = document.createElement('div');
+      overlay.id = 'overlay';
+      document.body.appendChild(overlay);
+  }
 
+  toast.innerHTML = message;
+  toast.className = 'toast show';
+  overlay.className = 'overlay show';
 
+  // timer to remove the show class
+  setTimeout(() => {
+      toast.className = 'toast';
+      overlay.className = 'overlay';
+  }, 10000);
 }
 

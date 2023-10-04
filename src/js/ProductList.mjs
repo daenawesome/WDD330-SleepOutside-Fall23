@@ -58,6 +58,7 @@ export default class ProductListing {
   }
 }
 
+// Function to generate the product card HTML
 function productCardTemplate(product) {
   // Calculate the discount percentage
   let { discountPercentage } = calculateDiscountPercentage(product.SuggestedRetailPrice, product.FinalPrice);
@@ -89,6 +90,7 @@ function productCardTemplate(product) {
   </li>`;
 }
 
+// Update the breadcrumb with category and item count
 function updateBreadcrumb(category, itemCount) {
   const breadcrumb = document.getElementById('breadcrumb');
   if (breadcrumb) {

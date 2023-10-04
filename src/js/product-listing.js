@@ -47,6 +47,5 @@ async function populateBrandDropdown() {
     });
     // Initial population of products
     myList.init();
-}
-
+} 
 populateBrandDropdown();

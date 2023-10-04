@@ -34,7 +34,7 @@ export default class ExternalServices {
     // Logging the JSON data
     // console.log('Data:', data);
 
-    return data.Result; // fetched product details are nested inside a Result property.
+    return data.Result; // fetched product details are nested inside a Result property!
   }
   
   // Fetch product data by ID from the API
@@ -46,15 +46,19 @@ export default class ExternalServices {
     return data;
   }
 
+  // Send checkout data to a server for processing.
   async checkout(orderData) {
+    // request options for the fetch call
     const options = {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(orderData)
+      body: JSON.stringify(orderData) // convert order data to a JSON string
     };
+    // send the request to the server
     const response = await fetch(`${this.baseURL}checkout`, options);
+    // convert and return the response from the server into a JSON object
     return response.json();
   }
 }

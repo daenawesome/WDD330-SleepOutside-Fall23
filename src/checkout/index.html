@@ -8,6 +8,7 @@
     <script src="../js/checkout.js" type="module"></script>
   </head>
   <body>
+    <!-- <div id="overlay" class="overlay"></div> -->
     <header class="divider" id="header">
     </header>
     <main class="divider">
@@ -16,49 +17,79 @@
       
       <form id="checkoutForm" action="">
         <section class="custInfo">
-          <p>Customer Information</p>
-        <label for="fname">First Name</label><br>
-        <input type="text" id="fname" name="fname" required placeholder="First Name"><br>
+          <h2>Customer Information</h2>
+          <div>
+          <label for="fname">First Name</label>
+          <input type="text" id="fname" name="fname" required placeholder="First Name"></div>
 
-        <label for="lname">Last Name</label><br>
-        <input type="text" id="lname" name="lname" required placeholder="Last Name"><br>
-        
-        <label for="street">Street</label><br>
-        <input name="street" type="text" id="street" required placeholder="Street"><br>
+          <div>
+          <label for="lname">Last Name</label>
+          <input type="text" id="lname" name="lname" required placeholder="Last Name"></div>
+          
+          <div>
+          <label for="street">Street</label>
+          <input name="street" type="text" id="street" required placeholder="Street"></div>
 
-        <label for="city">City</label><br>
-        <input name="city" type="text" id="city" required placeholder="Boise"><br>
+          <div>
+          <label for="city">City</label>
+          <input name="city" type="text" id="city" required placeholder="Boise"></div>
 
-        <label for="state">State</label><br>
-        <input name="state" type="text" id="state" required placeholder="Idaho"><br>
+          <div>
+          <label for="state">State</label>
+          <input name="state" type="text" id="state" required placeholder="Idaho"></div>
 
-        <label for="zip">Zipcode</label><br>
-        <input name="zip" value="00000" type="number" id="zip" required maxlength="5" placeholder="12345"><br>
+          <div>
+          <label for="zip">Zipcode</label>
+          <input name="zip" value="00000" type="number" id="zip" required maxlength="5" placeholder="12345"></div>
         </section>
 
         <section class="cardInfo">
-          <p>Card Information</p>
-        <label for="cardNumber">Card Number</label><br>
-        <input type="number" value="1234123412341234" id="cardNumber" name="cardNumber" required placeholder="1234 5678 9101 1121"><br>
+          <h2>Card Information</h2>
+          <div>
+          <label for="cardNumber">Card Number</label>
+          <input 
+            type="text" 
+            value="1234123412341234" 
+            id="cardNumber" 
+            name="cardNumber" 
+            required placeholder="1234 5678 9101 1121" 
+            maxlength="19"
+          ></div>
 
-        <label for="expiration">Expiration Date</label><br>
-        <input type="text" value="8/24" id="expiration" name="expiration" required placeholder="MM/YY"><br>
+          <div>
+          <!-- <label for="expiration">Expiration Date</label>
+          <input type="month" value="8/24" id="expiration" name="expiration" required onchange="formatExpirationDate(event)"> -->
+          <label for="originalExpiration">Expiration Date</label>
+          <input type="month" id="originalExpiration">
+          
+          <div class="hide">
+          <label for="expiration">Formatted Expiration Date</label>
+          <input type="text" id="expiration" readonly name="expiration"></div>
 
+        </div>
 
-        <label for="code">Security Code</label><br>
-        <input type="number" value="123" id="code" name="code" required placeholder="111">
+          <div>
+          <label for="code">Security Code</label>
+          <input type="number" value="123" id="code" name="code" required placeholder="111" maxlength="3"></div>
         </section>
 
         <section class="orderSum">
-        <p>Order Summary</p>
-        <p id="subTotal">Item Subtotal</p>
-        <p id="ship">Shipping Estimate</p>
-        <p id="tax">Tax</p>
-        <p id="orderTotal">Order Total</p>
-        </sectio>
-
-        <button class="submitButton" type="submit">Checkout</button>
+          <h2>Order Summary</h2>
+          <div>
+          <p id="subTotal">Item Subtotal</p></div>
+          <div>
+          <p id="ship">Shipping Estimate</p></div>
+          <div>
+          <p id="tax">Tax</p></div>
+          <div>
+          <p id="orderTotal">Order Total</p></div>
+          
+          <button class="submitButton" type="submit">Checkout</button>
+        </section>
       </form>
+
+
+      
 
 
     </main>

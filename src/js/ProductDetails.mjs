@@ -97,9 +97,6 @@ export default class ProductDetails {
     renderSuperscript();
     alertMessage('Product successfully added to the cart!');
 }
-
-
-
   // Render the product details in the specified selector
   renderProductDetails(selector) {
     const element = document.querySelector(selector);
@@ -107,10 +104,10 @@ export default class ProductDetails {
   }
 }
 
+// Update the breadcrumb with category and product name.
 function updateBreadcrumb(category, productName) {
   const breadcrumb = document.getElementById('breadcrumb');
   if (breadcrumb) {
       breadcrumb.innerHTML = `<a href="/product-listing/index.html?category=${category}">${[...category][0].toUpperCase() + category.slice(1)}</a> &#8594 ${productName}`;
   }
 }
-

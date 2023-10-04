@@ -1,11 +1,18 @@
-import { getLocalStorage, setLocalStorage } from './utils';
+import { getLocalStorage, alertMessage } from './utils';
 import ExternalServices from './ExternalServices.mjs';
 
 const services = new ExternalServices();
 
 function formDataToJSON(formElement) {
-  const formData = new FormData(formElement),
-    convertedJSON = {};
+  const formData = new FormData(formElement);
+
+  // Log the raw FormData
+  console.log('Raw FormData:', formData);
+  for (let pair of formData.entries()) {
+      console.log(pair[0] + ': ' + pair[1]);
+  }
+
+  const convertedJSON = {};
 
   formData.forEach(function (value, key) {
     convertedJSON[key] = value;
@@ -13,6 +20,7 @@ function formDataToJSON(formElement) {
 
   return convertedJSON;
 }
+
 
 function packageItems(items) {
   let simplifiedItems;
@@ -79,12 +87,23 @@ export default class CheckoutProcess {
     document.getElementById('tax').innerHTML = `Tax: $${tax.toFixed(2)}`;
     document.getElementById('ship').innerHTML = `Shipping: $${shipping.toFixed(2)}`;
     document.getElementById('orderTotal').innerHTML = `Total: $${orderTotal.toFixed(2)}`;
-  }
+    }
+
 
     async checkout() {
-    const formElement = document.forms['checkout'];
+    const formElement = document.forms['checkoutForm'];
 
-    const json = formDataToJSON(formElement);
+    // Calculate and set order totals
+    const { tax, shipping, orderTotal } = this.calculateOrderTotal();
+    this.tax = tax;
+    this.shipping = shipping;
+    this.orderTotal = orderTotal;
+
+    const formDataResult  = formDataToJSON(formElement);
+    console.log('Form Data Result:', formDataResult);
+
+    const json = formDataResult;
+
     json.orderDate = new Date();
     json.orderTotal = this.orderTotal;
     json.tax = this.tax;
@@ -95,17 +114,33 @@ export default class CheckoutProcess {
 
     try {
       const res = await services.checkout(json);
-      if (res && res.status === 200) { // Assuming a 200 status indicates success. Adjust as needed.
+      if (res && res.status === 200) { 
         console.log('Checkout submitted successfully:', res);
         // location.assign('../checkout/checkedout.html');
         localStorage.clear();
       } else {
         console.log('Checkout submission failed. Received:', res);
         // location.assign('../checkout/failed.html');
+            // Handle custom error message
+            if (res && res.name === 'servicesError') {
+                console.error(res.message);
+            } else {
+                // Handle other types of errors
+                console.error('Unexpected error during checkout.');
+            }
       }
     } catch (err) {
       console.log('Error during checkout submission:', err);
       // location.assign('../checkout/failed.html');
+      // Handle custom error message
+      if (err && err.name === 'servicesError') {
+        console.error(err.message);
+        alertMessage(err.message);
+    } else {
+        // Handle other types of errors
+        console.error('Unexpected error during checkout.');
+        alertMessage('Unexpected error during checkout.');
+    }
     }
   }
 

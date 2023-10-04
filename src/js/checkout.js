@@ -18,11 +18,20 @@ window.addEventListener('load', checkoutTotal);
 
 document.querySelector('#zip').addEventListener('blur', calcShipping);
 
+
 document
   .getElementById('checkoutForm')
   .addEventListener('submit', function (e) {
     e.preventDefault();
-    checkOut.checkout();
+    
+    const myForm = document.getElementById('checkoutForm');
+    const chk_status = myForm.checkValidity();
+    myForm.reportValidity();
+    
+    if(chk_status) {
+      checkOut.checkout();
+    }
   });
+
 
 

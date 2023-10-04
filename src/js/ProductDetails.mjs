@@ -2,7 +2,8 @@ import {
   setLocalStorage, 
   getLocalStorage, 
   renderSuperscript, 
-  calculateDiscountPercentage 
+  calculateDiscountPercentage,
+  alertMessage  
 } from './utils.mjs';
 
 // Function to generate the product details HTML
@@ -94,6 +95,7 @@ export default class ProductDetails {
     setLocalStorage('so-cart', this.cart);
     // Superscript Feature
     renderSuperscript();
+    alertMessage('Product successfully added to the cart!');
 }
 
 

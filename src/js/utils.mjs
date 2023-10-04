@@ -131,3 +131,44 @@ export function calculateDiscountPercentage(originalPrice, discountedPrice) {
     discount: (discount.toFixed(2))
   };
 }
+
+export function alertMessage(message, scroll = true, duration = 30000) {
+  // create element to hold our alert
+  const alert = document.createElement('div');
+  // add a class to style the alert
+  alert.classList.add('alert');
+  // set the contents. You should have a message and an X or something the user can click on to remove
+  alert.innerHTML = `<span class="alert-message">${message} <span class="alert-close">X</span></span>`;
+  // add a listener to the alert to see if they clicked on the X
+  let timer;
+  alert.addEventListener('click', function(e) {
+      if(e.target.classList.contains('alert-close')) {
+          clearTimeout(timer);  // Clear the timer if it's still pending
+          fadeOutAndRemove(this);
+          // this.remove();  // Remove the alert
+      }
+  });
+  // add the alert to the top of main
+  const main = document.querySelector('main');
+  main.prepend(alert);
+  // make sure they see the alert by scrolling to the top of the window
+  // we may not always want to do this...so default to scroll=true, but allow it to be passed in and overridden.
+  if(scroll)
+      window.scrollTo(0,0);
+  // Set a timer to automatically close the alert after the duration
+  timer = setTimeout(() => {
+      fadeOutAndRemove(alert);
+      // alert.remove();
+  }, duration);
+
+  function fadeOutAndRemove(element) {
+    element.style.animation = 'fadeOut 0.5s forwards';
+    setTimeout(() => {
+        element.remove();
+    }, 500); // This should match the duration of the fadeOut animation
+  }
+
+
+
+}
+

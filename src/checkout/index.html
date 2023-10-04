@@ -33,8 +33,8 @@
         <input name="state" type="text" id="state" required placeholder="Idaho"><br>
 
         <label for="zip">Zipcode</label><br>
-        <input name="zip" type="number" id="zip" required maxlength="5" placeholder="12345"><br>
-      </section>
+        <input name="zip" value="00000" type="number" id="zip" required maxlength="5" placeholder="12345"><br>
+        </section>
 
         <section class="cardInfo">
           <p>Card Information</p>
@@ -42,21 +42,22 @@
         <input type="number" value="1234123412341234" id="cardNumber" name="cardNumber" required placeholder="1234 5678 9101 1121"><br>
 
         <label for="expiration">Expiration Date</label><br>
-        <input type="number" value="1222" id="expiration" name="expiration" required placeholder="1111"><br>
+        <input type="text" value="8/24" id="expiration" name="expiration" required placeholder="MM/YY"><br>
+
 
         <label for="code">Security Code</label><br>
         <input type="number" value="123" id="code" name="code" required placeholder="111">
-      </section>
+        </section>
 
-      <section class="orderSum">
+        <section class="orderSum">
         <p>Order Summary</p>
         <p id="subTotal">Item Subtotal</p>
         <p id="ship">Shipping Estimate</p>
         <p id="tax">Tax</p>
         <p id="orderTotal">Order Total</p>
-      </section>
+        </sectio>
 
-      <button class="submitButton" type="submit">Checkout</button>
+        <button class="submitButton" type="submit">Checkout</button>
       </form>
 
 

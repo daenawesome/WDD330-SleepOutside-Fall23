@@ -58,7 +58,8 @@ export default class ExternalServices {
       body: JSON.stringify(orderData) // convert order data to a JSON string
     };
     // send the request to the server
-    const response = await fetch(`${this.checkoutBaseURL}checkout`, options);
+    // const response = await fetch(`${this.checkoutBaseURL}checkout`, options);
+    const response = await fetch('/.netlify/functions/checkout', options);
     // convert and return the response from the server into a JSON object
     return response.json();
   }

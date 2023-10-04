@@ -14,7 +14,8 @@ async function convertToJson(res) {
 export default class ExternalServices {
   constructor() {
     // Base URL from environment variable
-    this.fetchBaseURL = import.meta.env.VITE_FETCH_SERVER_URL;
+    this.fetchBaseURL = import.meta.env.VITE_FETCH_SERVER_URL
+    this.checkoutBaseURL = import.meta.env.VITE_CHECKOUT_SERVER_URL;
   }
 
   async getData(category) {

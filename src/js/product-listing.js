@@ -1,5 +1,5 @@
 import { loadHeaderFooter, getParam } from './utils.mjs';
-import ProductData from './ProductData.mjs';
+import ProductData from './ExternalServices.mjs';
 import ProductList from './ProductList.mjs';
 
 // Load the header and footer
@@ -47,6 +47,5 @@ async function populateBrandDropdown() {
     });
     // Initial population of products
     myList.init();
-}
-
+} 
 populateBrandDropdown();
